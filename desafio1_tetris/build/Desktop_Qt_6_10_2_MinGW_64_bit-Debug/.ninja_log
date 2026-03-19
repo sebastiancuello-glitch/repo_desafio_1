@@ -1,0 +1,21 @@
+# ninja log v6
+16	1253	7954978886771563	CMakeFiles/desafio1_tetris.dir/pieza.cpp.obj	1bd39b232c7de1ea
+36	1258	7954978886928078	CMakeFiles/desafio1_tetris.dir/main.cpp.obj	d25cd6ad49917d91
+27	1263	7954978886928078	CMakeFiles/desafio1_tetris.dir/juego.cpp.obj	2092ba9997346430
+7	1264	7954978886615481	CMakeFiles/desafio1_tetris.dir/tablero.cpp.obj	b358c56f2b91985e
+1264	1867	7954978899301388	desafio1_tetris.exe	bec44d3428c93a3f
+101	2110	7955565600614231	CMakeFiles/desafio1_tetris.dir/main.cpp.obj	d25cd6ad49917d91
+10	1509	7955567130481214	CMakeFiles/desafio1_tetris.dir/tablero.cpp.obj	b358c56f2b91985e
+1510	1915	7955567145476019	desafio1_tetris.exe	bec44d3428c93a3f
+435	3553	7955631639320377	CMakeFiles/desafio1_tetris.dir/main.cpp.obj	d25cd6ad49917d91
+44	1592	7955632938333974	CMakeFiles/desafio1_tetris.dir/tablero.cpp.obj	b358c56f2b91985e
+1595	2426	7955632953836843	desafio1_tetris.exe	bec44d3428c93a3f
+46	2199	7955832147829639	CMakeFiles/desafio1_tetris.dir/main.cpp.obj	d25cd6ad49917d91
+15	4461	7955833031004352	CMakeFiles/desafio1_tetris.dir/pieza.cpp.obj	1bd39b232c7de1ea
+59	1907	7955833969283182	CMakeFiles/desafio1_tetris.dir/main.cpp.obj	d25cd6ad49917d91
+75	1613	7955834933934333	CMakeFiles/desafio1_tetris.dir/main.cpp.obj	d25cd6ad49917d91
+102	1900	7955838768080305	CMakeFiles/desafio1_tetris.dir/main.cpp.obj	d25cd6ad49917d91
+90	1909	7955838768080305	CMakeFiles/desafio1_tetris.dir/pieza.cpp.obj	1bd39b232c7de1ea
+143	2853	7955842749795331	CMakeFiles/desafio1_tetris.dir/main.cpp.obj	d25cd6ad49917d91
+12	1205	7955844626796118	CMakeFiles/desafio1_tetris.dir/pieza.cpp.obj	1bd39b232c7de1ea
+1207	1625	7955844638737796	desafio1_tetris.exe	bec44d3428c93a3f
