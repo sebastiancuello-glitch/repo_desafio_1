@@ -9,8 +9,9 @@ private:
     int fila;
     int columna;
     int tipo;
+    int rotacion;
 
-    void cargarForma(int tipo);
+    void cargarForma(int tipo, int rotacion);
 
 
 public:
@@ -21,6 +22,8 @@ public:
     int getFila() const;
     int getColumna () const;
     int getTipo () const;
+    int getRotacion () const;
+
 
 
     void setFila (int fila);
@@ -30,6 +33,7 @@ public:
     void moverIzquierda();
     void moverDerecha();
     void moverAbajo();
+    void rotarDerecha();
 };
 
 

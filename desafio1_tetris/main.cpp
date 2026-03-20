@@ -147,6 +147,7 @@ int main()
         cout << "a = izquierda:\n";
         cout << "d = derecha:\n";
         cout << "s = abajo:\n";
+        cout << "r = rotar:\n";
         cout << "q = salir:\n";
         cout << "opcion:";
         cin >> opcion;
@@ -197,7 +198,19 @@ int main()
 
             }
         }
+
+        else if (opcion == 'r'){
+
+            Pieza copia = pieza;
+            copia.rotarDerecha();
+
+            if(puedeMoverse(tablero, copia, copia.getFila(), copia.getColumna())){
+                pieza.rotarDerecha();
+            }
+        }
     }while (opcion != 'q' && !gameOver);
+
+
 
 
     if(gameOver){

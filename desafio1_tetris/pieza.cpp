@@ -8,32 +8,70 @@ Pieza::Pieza(int tipo) {
         tipo = rand() % 7;
     }
 
-    cargarForma(tipo);
+    this ->tipo = tipo;
+    this ->rotacion = 0;
+    this ->fila = 0;
+    this ->columna = 0;
 
-    fila = 0;
-    columna = 0;
+    cargarForma(this -> tipo, this ->rotacion);
+
 }
 
-void Pieza :: cargarForma(int tipo){
+void Pieza :: cargarForma(int tipo, int rotacion){
 
-    this ->tipo = tipo;
+    this -> tipo = tipo;
+    this -> rotacion = rotacion;
 
-    const unsigned char formas[7][4] = {
-
-    {15, 0, 0, 0}, // I -> 111
-    {12, 12, 0, 0}, // O -> 1100 / 1100
-    {4, 14, 0, 0}, // T -> 0100 / 1110
-    {6, 12, 0, 0}, // S -> 0110 / 1100
-    {12, 6, 0, 0}, // Z -> 1100 / 0110
-    {8, 14, 0, 0}, // J -> 1000 / 1110
-    {2, 14, 0, 0} // L -> 0010 / 1110
+    const unsigned char formas[7][4][4]=
+    {
+        {
+         {15, 0, 0, 0},
+         {8, 8, 8, 8},
+         {15, 0, 0, 0},
+         {8, 8, 8, 8}
+        },
+        {
+         {12, 12, 0, 0},
+         {12, 12, 0, 0},
+         {12, 12, 0, 0},
+         {12, 12, 0, 0}
+        },
+        {
+         {4, 14, 0, 0},
+         {8, 12, 8, 0},
+         {14, 4, 0, 0},
+         {4, 12, 4, 0}
+        },
+        {
+         {6, 12, 0, 0},
+         {8, 12, 4, 0},
+         {6, 12, 0, 0},
+         {8, 12, 4, 0}
+        },
+        {
+         {12, 6, 0, 0},
+         {4, 12, 8, 0},
+         {12, 6, 0, 0},
+         {4, 12, 8, 0}
+        },
+        {
+         {8, 14, 0, 0},
+         {12, 8, 8, 0},
+         {14, 2, 0, 0},
+         {4, 4, 12, 0}
+        },
+        {
+         {2, 14, 0, 0},
+         {8, 8, 12, 0},
+         {14, 8, 0, 0},
+         {12, 4, 4, 0}
+        }
     };
 
     for (int i = 0; i < 4; i++){
 
-        forma[i] = formas[tipo][i];
+        forma[i] = formas[tipo][rotacion][i];
     }
-
 }
 
 bool Pieza :: tieneBloque(int filaLocal, int columnaLocal) const{
@@ -62,6 +100,11 @@ int Pieza :: getColumna () const {
 int Pieza :: getTipo() const {
 
     return tipo;
+}
+
+int Pieza :: getRotacion() const {
+
+    return rotacion;
 }
 void Pieza::setFila(int fila){
 
@@ -98,6 +141,11 @@ void Pieza:: moverAbajo (){
     fila++;
 }
 
+void Pieza :: rotarDerecha() {
+
+    int nuevaRotacion = (rotacion + 1) % 4;
+    cargarForma(tipo, nuevaRotacion);
+}
 
 
 
