@@ -8,15 +8,20 @@ private:
     unsigned char forma[4];
     int fila;
     int columna;
+    int tipo;
+
+    void cargarForma(int tipo);
 
 
 public:
-    Pieza();
+    Pieza(int tipo = -1);
 
     bool tieneBloque(int filaLocal, int columnaLocal) const;
 
-    int NFila() const;
-    int NColumna () const;
+    int getFila() const;
+    int getColumna () const;
+    int getTipo () const;
+
 
     void setFila (int fila);
     void setColumna(int columna);

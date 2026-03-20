@@ -1,17 +1,39 @@
 #include "pieza.h"
-#include <iostream>
+#include <cstdlib>
 
-using namespace std;
+Pieza::Pieza(int tipo) {
 
-Pieza::Pieza() {
+    if (tipo < 0 || tipo > 6) {
 
-    forma[0] = 4; //0100
-    forma[1] = 14; // 1110
-    forma[2] = 0; // 0000
-    forma[3] = 0; // 0000
+        tipo = rand() % 7;
+    }
+
+    cargarForma(tipo);
 
     fila = 0;
     columna = 0;
+}
+
+void Pieza :: cargarForma(int tipo){
+
+    this ->tipo = tipo;
+
+    const unsigned char formas[7][4] = {
+
+    {15, 0, 0, 0}, // I -> 111
+    {12, 12, 0, 0}, // O -> 1100 / 1100
+    {4, 14, 0, 0}, // T -> 0100 / 1110
+    {6, 12, 0, 0}, // S -> 0110 / 1100
+    {12, 6, 0, 0}, // Z -> 1100 / 0110
+    {8, 14, 0, 0}, // J -> 1000 / 1110
+    {2, 14, 0, 0} // L -> 0010 / 1110
+    };
+
+    for (int i = 0; i < 4; i++){
+
+        forma[i] = formas[tipo][i];
+    }
+
 }
 
 bool Pieza :: tieneBloque(int filaLocal, int columnaLocal) const{
@@ -27,17 +49,20 @@ bool Pieza :: tieneBloque(int filaLocal, int columnaLocal) const{
 
 }
 
-int Pieza::NFila () const{
+int Pieza::getFila () const{
 
     return fila;
 }
 
-int Pieza :: NColumna () const {
+int Pieza :: getColumna () const {
 
     return columna;
 }
 
+int Pieza :: getTipo() const {
 
+    return tipo;
+}
 void Pieza::setFila(int fila){
 
     this -> fila = fila;

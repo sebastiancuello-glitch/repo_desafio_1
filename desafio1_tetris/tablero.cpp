@@ -22,7 +22,7 @@ Tablero :: ~Tablero()
     }
 }
 
-bool Tablero :: dimesionesvalidas() const{
+bool Tablero:: dimesionesvalidas() const{
 
     return(ancho >= 8 && alto >= 8 && ancho % 8 == 0);
 }
@@ -109,19 +109,20 @@ void Tablero :: apagarCelda(int fila, int columna){
 }
 
 
-int Tablero :: NAncho() const{
+int Tablero ::getAncho () const {
 
     return ancho;
 
 }
 
-int Tablero :: NAlto() const {
+int Tablero :: getAlto () const {
 
     return alto;
 
 }
 
-int Tablero:: NBytesPorFila() const {
+int Tablero:: getBytesPorFila () const {
 
     return bytesPorFila;
+
 }

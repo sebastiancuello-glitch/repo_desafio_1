@@ -1,29 +1,112 @@
 #include <iostream>
+#include <cstdlib>
+#include <ctime>
 #include "tablero.h"
 #include "pieza.h"
 
 
 using namespace std;
 
-void dibujarPiezaEnTablero(Tablero& tablero, const Pieza & pieza){
+bool piezaOcupaCelda (const Pieza& pieza, int fila, int columna){
+
+    for(int i = 0; i < 4; i++){
+
+        for(int j = 0; j < 4 ; j++){
+
+            if (pieza.tieneBloque(i, j)){
+
+                int filaGlobal = pieza.getFila() + i;
+                int columnaGlobal = pieza.getColumna() + j;
+
+                if (filaGlobal == fila && columnaGlobal == columna){
+
+                    return true;
+                }
+            }
+        }
+    }
+    return false;
+}
+
+void imprimirConPieza(const Tablero& tablero, const Pieza& pieza){
+
+    for ( int i = 0; i< tablero.getAlto(); i++){
+
+        for ( int j = 0; j < tablero.getAncho(); j++){
+
+            if (piezaOcupaCelda(pieza, i, j) || tablero.estaOcupada(i, j)){
+
+                cout << "#";
+            }
+
+            else {
+
+                cout << ".";
+            }
+
+        }
+        cout << endl;
+    }
+}
+
+
+bool puedeMoverse( const Tablero& tablero, const Pieza& pieza, int nuevaFila, int nuevaColumna){
 
     for (int i = 0; i < 4; i++){
 
-        for(int j = 0; j <4; j++){
+        for (int j = 0; j < 4; j++){
 
-            if (pieza.tieneBloque(i,j)){
+            if(pieza.tieneBloque(i,j)){
 
-                tablero.encenderCelda(pieza.NFila()+ i, pieza.NColumna() + j);
+                int filaGlobal = nuevaFila + i;
+                int columnaGlobal = nuevaColumna + j;
+
+                if (!tablero.dentroDeLimites(filaGlobal, columnaGlobal)){
+
+                    return false;
+                }
+
+                if (tablero.estaOcupada(filaGlobal, columnaGlobal)){
+
+                    return false;
+                }
+            }
+        }
+    }
+
+    return true;
+
+}
+
+void fijarPieza(Tablero& tablero, const Pieza& pieza){
+
+    for (int i = 0; i < 4; i++){
+
+        for (int j = 0; j < 4; j++){
+
+
+            if( pieza.tieneBloque(i, j)){
+
+                tablero.encenderCelda(pieza.getFila() + i , pieza.getColumna() + j);
             }
         }
     }
 }
+void centrarPieza (Pieza& pieza, int anchoTablero){
+
+    pieza.setPosicion(0, (anchoTablero / 2) - 2);
+}
+void imprimirSeparador(){
+
+    cout << "\n ------------------------\n";
+}
+
+
 
 int main()
 {
-    cout << "proyecto tetris!" << endl;
 
-
+    srand (time(nullptr));
     int ancho, alto;
 
     cout << "ingrese el acho del tablero: "<< endl;
@@ -43,13 +126,87 @@ int main()
     tablero.inicializar();
 
     Pieza pieza;
-    pieza.setPosicion(1, (ancho / 2 )- 2);
+    centrarPieza(pieza, tablero.getAncho());
 
-    dibujarPiezaEnTablero(tablero,pieza);
+    if (!puedeMoverse(tablero, pieza, pieza.getFila(), pieza.getColumna())){
+
+        cout << " Game Over: no se pudo colocar la pieza inicial. " << endl;
+        return 0;
+    }
+
+    char opcion;
+    bool gameOver = false;
+
+    do
+    {
+        imprimirSeparador();
+        imprimirConPieza(tablero,pieza);
 
 
-    cout << "\ntablero con pieza de prueba:\n";
-    tablero.imprimir();
+        cout << "\ncontroles:\n";
+        cout << "a = izquierda:\n";
+        cout << "d = derecha:\n";
+        cout << "s = abajo:\n";
+        cout << "q = salir:\n";
+        cout << "opcion:";
+        cin >> opcion;
+
+
+
+
+
+        if(opcion == 'a'){
+
+            if(puedeMoverse(tablero, pieza, pieza.getFila(), pieza.getColumna() - 1)){
+
+                pieza.moverIzquierda();
+            }
+        }
+
+        else if (opcion == 'd'){
+
+            if (puedeMoverse(tablero, pieza, pieza.getFila(), pieza.getColumna() + 1)){
+
+                pieza.moverDerecha();
+            }
+        }
+
+        else if (opcion == 's'){
+
+            if(puedeMoverse(tablero, pieza, pieza.getFila(), pieza.getColumna())){
+
+                pieza.moverAbajo();
+            }
+
+            else {
+
+                fijarPieza(tablero, pieza);
+
+                Pieza nuevaPieza;
+                centrarPieza(nuevaPieza, tablero.getAncho());
+
+
+                if(!puedeMoverse(tablero, nuevaPieza, nuevaPieza.getFila(),nuevaPieza.getColumna())){
+
+                    gameOver = true;
+                }
+
+                else{
+                    pieza = nuevaPieza;
+                }
+
+            }
+        }
+    }while (opcion != 'q' && !gameOver);
+
+
+    if(gameOver){
+
+        imprimirSeparador();
+        tablero.imprimir();
+        cout <<"\nGame Over: no hay espacio para una nueva pieza. " << endl;
+    }
+
 
 
     return 0;
