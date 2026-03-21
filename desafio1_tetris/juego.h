@@ -20,6 +20,7 @@ private:
     void centrarPieza(Pieza& pieza);
     void generarNuevaPieza();
     void procesarOpcion(char opcion);
+    void aplicarDescenso();
 
 public:
     Juego(int ancho, int alto);

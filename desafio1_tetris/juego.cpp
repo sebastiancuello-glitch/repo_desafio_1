@@ -110,6 +110,7 @@ void Juego :: centrarPieza (Pieza& pieza){
     pieza.setPosicion(0, (tablero.getAncho() / 2) - 2);
 }
 
+
 void Juego :: generarNuevaPieza(){
 
     Pieza nuevaPieza;
@@ -127,6 +128,19 @@ void Juego :: generarNuevaPieza(){
 
 }
 
+void Juego::aplicarDescenso(){
+
+    if (puedeMoverse(piezaActual, piezaActual.getFila()+ 1, piezaActual.getColumna())){
+
+        piezaActual.moverAbajo();
+    }
+    else{
+
+        fijarPieza();
+        tablero.limpiarFilasCompletas();
+        generarNuevaPieza();
+    }
+}
 void Juego :: procesarOpcion(char opcion){
 
     if (opcion == 'a'){
@@ -213,6 +227,11 @@ void Juego :: ejecutar(){
         }
 
         procesarOpcion(opcion);
+
+        if(!gameOver &&(opcion == 'a' || opcion == 'd' || opcion == 'r')){
+
+            aplicarDescenso();
+        }
     }
 
     if (gameOver){
