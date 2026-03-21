@@ -51,7 +51,7 @@ void Juego :: imprimirConPieza() const {
         cout << "|" << endl;
     }
 
-    cout <<"  +";
+    cout <<" +";
 
     for (int j = 0; j < tablero.getAncho(); j++){
 
