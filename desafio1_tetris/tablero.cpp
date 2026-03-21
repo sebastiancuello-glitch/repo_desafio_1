@@ -46,6 +46,8 @@ void Tablero::imprimir() const{
 
     for(int i= 0; i< alto; i++){
 
+        cout << i << " | ";
+
         for (int j = 0; j < ancho; j++){
 
 
@@ -57,9 +59,18 @@ void Tablero::imprimir() const{
                 cout <<".";
             }
         }
-        cout << endl;
+        cout << "|" << endl;
 
     }
+
+    cout << "  +";
+
+    for(int j = 0; j < ancho; j++){
+
+        cout << "-";
+    }
+
+    cout << "+" << endl;
 }
 
 bool Tablero :: dentroDeLimites(int fila, int columna) const{
@@ -108,6 +119,59 @@ void Tablero :: apagarCelda(int fila, int columna){
     celdas[fila][indiceByte] = celdas[fila][indiceByte] & ~(1 << indiceBit);
 }
 
+bool Tablero :: filaCompleta(int fila) const {
+
+    if ( fila <0 || fila >= alto){
+
+    return false;
+    }
+
+    for (int j = 0; j < bytesPorFila; j++){
+
+        if(celdas[fila][j] != 255){
+
+            return false;
+        }
+    }
+
+    return true;
+}
+
+void Tablero:: eliminarFila(int fila){
+
+    if (fila <0 || fila >= alto){
+
+        return;
+    }
+
+    for ( int i = fila; i > 0; i-- ){
+
+        for (int j = 0; j < bytesPorFila; j++){
+
+            celdas[i][j] = celdas [ i -1][j];
+        }
+    }
+
+    for (int j = 0; j < bytesPorFila; j++){
+
+        celdas[0][j] = 0;
+    }
+}
+
+
+void Tablero :: limpiarFilasCompletas(){
+
+    for( int i = alto - 1; i >= 0; i--){
+
+        if (filaCompleta(i)){
+
+            eliminarFila(i);
+            i++;
+        }
+    }
+}
+
+
 
 int Tablero ::getAncho () const {
 
@@ -126,3 +190,5 @@ int Tablero:: getBytesPorFila () const {
     return bytesPorFila;
 
 }
+
+

@@ -32,6 +32,8 @@ void imprimirConPieza(const Tablero& tablero, const Pieza& pieza){
 
     for ( int i = 0; i< tablero.getAlto(); i++){
 
+        cout << i << " |";
+
         for ( int j = 0; j < tablero.getAncho(); j++){
 
             if (piezaOcupaCelda(pieza, i, j) || tablero.estaOcupada(i, j)){
@@ -45,8 +47,17 @@ void imprimirConPieza(const Tablero& tablero, const Pieza& pieza){
             }
 
         }
-        cout << endl;
+        cout << "|" << endl;
     }
+
+    cout <<"  +";
+
+    for (int j = 0; j < tablero.getAncho(); j++){
+
+        cout << "-";
+    }
+
+    cout<< "+" << endl;
 }
 
 
@@ -102,7 +113,6 @@ void imprimirSeparador(){
 }
 
 
-
 int main()
 {
 
@@ -142,13 +152,7 @@ int main()
         imprimirSeparador();
         imprimirConPieza(tablero,pieza);
 
-
-        cout << "\ncontroles:\n";
-        cout << "a = izquierda:\n";
-        cout << "d = derecha:\n";
-        cout << "s = abajo:\n";
-        cout << "r = rotar:\n";
-        cout << "q = salir:\n";
+        cout << "[a] izquierda [d] derecha [s] abajo [r] rotar [q] salir\n";
         cout << "opcion:";
         cin >> opcion;
 
@@ -182,6 +186,7 @@ int main()
             else {
 
                 fijarPieza(tablero, pieza);
+                tablero.limpiarFilasCompletas();
 
                 Pieza nuevaPieza;
                 centrarPieza(nuevaPieza, tablero.getAncho());

@@ -21,6 +21,10 @@ public:
     void encenderCelda (int fila, int columna);
     void apagarCelda (int fila, int columna);
 
+    bool filaCompleta (int fila) const;
+    void eliminarFila (int fila);
+    void limpiarFilasCompletas ();
+
     int getAncho() const;
     int getAlto() const;
     int getBytesPorFila() const;
